@@ -1,0 +1,27 @@
+.footer {
+    background-color: #282c34;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 10px;
+    width: 100%;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .links {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .link {
+    color: #61dafb;
+    text-decoration: none;
+  }
+  
