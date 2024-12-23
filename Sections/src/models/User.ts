@@ -7,9 +7,6 @@ import {
     type Sequelize,
   } from 'sequelize';
   
-
-  ! This is how we declared the User model using our own interfaces
-  
   import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
   
   interface UserAttributes {
@@ -38,7 +35,7 @@ import {
     declare password: string;
   }
   
-  export function UserFactory(sequelize: Sequelize) {
+  export function UserInfo(sequelize: Sequelize) {
     User.init(
       {
         id: {
