@@ -1,50 +1,51 @@
-// Importing specific types and functions from the 'jwt-decode' library.
-// JwtPayload: A type definition representing the structure of a JSON Web Token payload.
-// jwtDecode: A function used to decode a JSON Web Token (JWT) and extract its payload.
 import { type JwtPayload, jwtDecode } from 'jwt-decode';
-import type { UserData } from '../interfaces/UserData';
+import type { UserData } from '../interface/UserData';
 
 class AuthService {
-  getProfile() {
-    // Decode the JSON Web Token (JWT) using the jwtDecode function, specifying the expected payload type as UserData.
-    // The getToken() method is called to retrieve the JWT, which is then passed to jwtDecode to extract and return its payload.
-    return jwtDecode<UserData>(this.getToken());
+  getProfile(): UserData | null {
+    try {
+      const token = this.getToken();
+      if (!token) {
+        throw new Error('No token found');
+      }
+      return jwtDecode<UserData>(token);
+    } catch (err) {
+      console.error('Error decoding token:', err);
+      return null; // Return null if the token is invalid
+    }
   }
 
-  loggedIn() {
+  loggedIn(): boolean {
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token);
   }
 
-  isTokenExpired(token: string) {
+  isTokenExpired(token: string): boolean {
     try {
-      // Attempt to decode the provided token using jwtDecode, expecting a JwtPayload type.
       const decoded = jwtDecode<JwtPayload>(token);
-
-      // Check if the decoded token has an 'exp' (expiration) property and if it is less than the current time in seconds.
-      if (decoded?.exp && decoded?.exp < Date.now() / 1000) {
-        // If the token is expired, return true indicating that it is expired.
+      if (!decoded?.exp) {
+        // If the token doesn't have an 'exp', consider it invalid
         return true;
       }
+      return decoded.exp < Date.now() / 1000; // Check if 'exp' is in the past
     } catch (err) {
-      // If decoding fails (e.g., due to an invalid token format), catch the error and return false.
-      return false;
+      console.error('Error decoding token for expiration check:', err);
+      return true; // Consider the token expired if decoding fails
     }
   }
 
   getToken(): string {
-    const loggedUser = localStorage.getItem('id_token') || '';
-    return loggedUser;
+    return localStorage.getItem('id_token') || '';
   }
 
-  login(idToken: string) {
+  login(idToken: string): void {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    window.location.assign('/'); // Redirect to home page after login
   }
 
-  logout() {
+  logout(redirectUrl: string = '/'): void {
     localStorage.removeItem('id_token');
-    window.location.assign('/');
+    window.location.assign(redirectUrl); // Redirect to a customizable URL
   }
 }
 
