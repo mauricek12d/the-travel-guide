@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Destinations from './pages/Destinations';
+import DestinationsList from './pages/DestinationsList';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import './App.css'; // Imported CSS file
@@ -35,7 +36,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/destinations" element={<Destinations />} />
+        <Route path="/destinations/" element={<DestinationsList />} />
+        <Route path="/destinations/:name" element={<Destinations />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
       </Routes>
