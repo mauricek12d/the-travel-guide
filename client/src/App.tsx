@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Destinations from './pages/Destinations';
@@ -13,22 +13,51 @@ const App: React.FC = () => {
   return (
     <Router>
       <nav className="navbar">
-        <img src={logo} alt="New Jersey Vacations Logo" className="navbar-logo" />
+        <img
+          src={logo}
+          alt="New Jersey Vacations logo, discover destinations in NJ"
+          className="navbar-logo"
+        />
         <ul className="navbar-list">
           <li>
-            <Link to="/" className="navbar-button">Home</Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? 'navbar-button active' : 'navbar-button')}
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/about" className="navbar-button">About</Link>
+            <NavLink
+              to="/about"
+              className={({ isActive }) => (isActive ? 'navbar-button active' : 'navbar-button')}
+            >
+              About
+            </NavLink>
           </li>
           <li>
-            <Link to="/destinations" className="navbar-button">Destinations</Link>
+            <NavLink
+              to="/destinations"
+              className={({ isActive }) => (isActive ? 'navbar-button active' : 'navbar-button')}
+            >
+              Destinations
+            </NavLink>
           </li>
           <li>
-            <Link to="/contact" className="navbar-button">Contact</Link>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) => (isActive ? 'navbar-button active' : 'navbar-button')}
+            >
+              Contact
+            </NavLink>
           </li>
           <li>
-            <Link to="/login" className="navbar-button">Login</Link>
+            <NavLink
+              to="/login"
+              className={({ isActive }) => (isActive ? 'navbar-button active' : 'navbar-button')}
+            >
+              Login
+            </NavLink>
           </li>
         </ul>
       </nav>
@@ -36,10 +65,11 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/destinations/" element={<DestinationsList />} />
+        <Route path="/destinations" element={<DestinationsList />} />
         <Route path="/destinations/:name" element={<Destinations />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Routes>
     </Router>
   );
