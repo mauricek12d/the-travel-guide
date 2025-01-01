@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './DestinationsList.css';
-import LavImage from '../assets/Lav.jpg';
+import StoneImage from '../assets/Stone.jpg';
 
 const destinations = {
   capemay: {
@@ -25,9 +25,8 @@ const DestinationsList: React.FC = () => {
   return (
     <div
       className="destinations-page"
-      style={{ backgroundImage: `url(${LavImage})` }}
+      style={{ backgroundImage: `url(${StoneImage})` }}
     >
-      <h1>Destinations</h1>
       <ul className="destinations-grid">
         {Object.entries(destinations).map(([key, destination]) => (
           <li key={key} className="destination-item">
@@ -37,10 +36,6 @@ const DestinationsList: React.FC = () => {
           </li>
         ))}
       </ul>
-
-      <div className="bottom-text">
-        <h2>Lavallette, New Jersey</h2>
-      </div>
     </div>
   );
 };
