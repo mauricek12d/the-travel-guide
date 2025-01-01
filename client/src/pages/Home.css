@@ -1,80 +1,101 @@
 /* Hero Section */
 .hero {
-    background: url('../assets/LBI Bridge.jpg') no-repeat center center;
-    background-size: cover;
-    color: whitesmoke;
-    text-align: center;
-    padding: 50px 20px;
+  position: relative; /* Enables positioning of child elements */
+  background: url('../assets/LBI Bridge.jpg') no-repeat center center;
+  background-size: cover;
+  color: whitesmoke;
+  text-align: center;
+  padding: 50px 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.hero-heading {
+  font-size: 2.5em;
+  margin: 20px 0 10px;
+}
+
+.hero-paragraph {
+  font-size: 1.2em;
+  margin: 0 0 20px;
+}
+
+.hero-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #007BFF;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #0056b3;
+}
+
+/* Text Overlay for Image */
+.hero-image-caption {
+  position: absolute;
+  top: 50%; /* Vertical center */
+  right: 20px; /* Distance from the right edge */
+  transform: translateY(-50%); /* Adjusts the element to be centered vertically */
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: whitesmoke;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+
+
+/* Featured Section */
+.featured {
+  padding: 40px 20px;
+}
+
+/* Testimonials Section */
+.testimonial {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.testimonial-heading {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.blockquote {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.cite {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+      padding: 10px;
   }
-  
+
   .hero-heading {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-  }
-  
-  .hero-paragraph {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-  }
-  
-  .hero-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .hero-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Featured Section */
-  .featured {
-    padding: 40px 20px;
-  }
-  
-  /* Testimonials Section */
-  .testimonial {
-    background-color: #f9f9f9;
-    padding: 40px 20px;
-    text-align: center;
-  }
-  
-  .testimonial-heading {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  
-  .blockquote {
-    font-style: italic;
-    margin-bottom: 10px;
-  }
-  
-  .cite {
-    font-size: 0.9em;
-    color: #555;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .hero {
-      padding: 30px 10px;
-    }
-  
-    .hero-heading {
       font-size: 2em;
-    }
-  
-    .hero-paragraph {
-      font-size: 1em;
-    }
-  
-    .hero-button {
-      font-size: 0.9em;
-    }
   }
-  
+
+  .hero-paragraph {
+      font-size: 1em;
+  }
+
+  .hero-button {
+      font-size: 0.9em;
+  }
+}
