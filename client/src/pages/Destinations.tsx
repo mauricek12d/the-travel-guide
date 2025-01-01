@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Destinations.css';
-import ACImage from '../assets/AC.jpg';
+import ACImage from '../assets/Atlantic City.jpg';
 import CapeMayImage from '../assets/Cape May.jpg';
 import LBIImage from '../assets/lighthouse.jpg';
 

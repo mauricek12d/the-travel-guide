@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-image-caption">
-          Picture of the Long Beach Island Bridge
+          Photo of the Long Beach Island Bridge
         </div>
         <h1 className="hero-heading">Explore New Jersey's Shores and Camping Grounds</h1>
         <p className="hero-paragraph">
