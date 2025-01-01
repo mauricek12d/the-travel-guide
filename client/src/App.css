@@ -1,57 +1,44 @@
-/* General reset for styling */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Navbar styling */
-  .navbar {
-    background-color: lightgreen; /* Dark background */
-    display: flex;
-    align-items: center; /* Align items vertically */
-    padding: 1rem 2rem; /* Increase padding for a bigger Navbar */
-    position: sticky;
-    top: 0; /* Sticks the navbar to the top */
-    z-index: 1000; /* Ensures it stays above other elements */
-    width: 100%;
-    height: 80px; /* Adjust height for a bigger Navbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  }
-  
-  /* Logo styling */
-  .navbar-logo {
-    height: 60px; /* Adjust size of the logo */
-    width: auto; /* Maintain aspect ratio */
-    margin-right: 30rem; /* Add space between the logo and the buttons */
-  }
-  
-  /* Navbar list styling */
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #000080;
+}
+
+.navbar-logo {
+  max-height: 70px;
+}
+
+.navbar-list {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-button {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-button:hover {
+  color: #007bff;
+}
+
+.navbar-button.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .navbar-list {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    gap: 1rem; /* Adds space between buttons */
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  /* Navbar buttons styling */
-  .navbar-button {
-    color: white;
-    text-decoration: none;
-    background-color: #007bff; /* Blue button color */
-    padding: 0.8rem 1.5rem; /* Make buttons larger */
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: bold;
-    font-size: 1.1rem; /* Increase font size */
-  }
-  
-  .navbar-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: scale(1.05); /* Slight zoom on hover */
-  }
-  
-  .navbar-button:active {
-    background-color: #003f7f; /* Even darker blue on click */
-  }
-  
+}
