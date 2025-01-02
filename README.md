@@ -1,6 +1,6 @@
 # **Travel Guide Web Application**
 
-This project is a web application built to showcase popular destinations in New Jersey, including Cape May, Atlantic City, High Point, Wildwood, and Long Beach Island. Each destination page provides details such as a description, images, and links to local resources.
+This project is a web application built to showcase popular destinations in New Jersey, including Cape May, Atlantic City, and Long Beach Island. Each destination page provides details such as a description, images, and links to local resources.
 
 ---
 
