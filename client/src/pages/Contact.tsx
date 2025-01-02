@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import WildwoodImage from '../assets/Wildwood.jpg'; // Adjust the path as needed
+import WildwoodImage from '../assets/wildwood.jpg'; // Adjust the path as needed
 import './Contact.css';
 
 const Contact: React.FC = () => {
