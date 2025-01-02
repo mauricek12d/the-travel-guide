@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import SeasideImage from '../assets/Seaside Heights.jpg'; // Adjust the path as necessary
 
 const About: React.FC = () => {
   const containerStyle = {
@@ -7,6 +8,9 @@ const About: React.FC = () => {
     margin: 'auto',
     fontFamily: 'Arial, sans-serif',
     lineHeight: '1.6',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent white background for readability
+    borderRadius: '10px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Optional shadow for better distinction
   };
 
   const headingStyle = {
@@ -21,41 +25,35 @@ const About: React.FC = () => {
     marginBottom: '20px',
   };
 
-  const linkStyle = {
-    color: '#007bff',
-    textDecoration: 'none',
-  };
-
-  const [hover, setHover] = useState(false);
-
   return (
-    <div style={containerStyle}>
-      <h1 style={headingStyle}>About Us</h1>
-      <p style={paragraphStyle}>
-        Welcome to the New Jersey Travel Guide! Our mission is to help you explore the best destinations
-        across the Garden State, from serene beaches to breathtaking state parks. Whether you're planning
-        a weekend getaway or a family vacation, we've got you covered with recommendations, travel tips,
-        and local insights.
-      </p>
-      <h2 style={headingStyle}>Our Vision</h2>
-      <p style={paragraphStyle}>
-        We aim to showcase the unique charm and diverse attractions that make New Jersey a top travel
-        destination. From Cape May’s historic streets to the adventure-filled trails of High Point, our
-        guide connects you with the experiences that matter most.
-      </p>
-      <h2 style={headingStyle}>Contact Us</h2>
-      <p style={paragraphStyle}>
-        Have questions or suggestions? Reach out to us at{' '}
-        <a
-          href="mailto:info@njtravelguide.com"
-          style={{ ...linkStyle, textDecoration: hover ? 'underline' : 'none' }}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        >
-          info@njtravelguide.com
-        </a>
-        . We’d love to hear from you!
-      </p>
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundImage: `url(${SeasideImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px',
+      }}
+    >
+      <div style={containerStyle}>
+        <h1 style={headingStyle}>About Us</h1>
+        <p style={paragraphStyle}>
+          Welcome to the New Jersey Travel Guide! Our mission is to help you explore the best
+          destinations across the Garden State, from serene beaches to breathtaking state parks.
+          Whether you're planning a weekend getaway or a family vacation, we've got you covered with
+          recommendations, travel tips, and local insights.
+        </p>
+        <h2 style={headingStyle}>Our Vision</h2>
+        <p style={paragraphStyle}>
+          We aim to showcase the unique charm and diverse attractions that make New Jersey a top travel
+          destination. From Cape May’s historic streets to the adventure-filled trails of High Point, our
+          guide connects you with the experiences that matter most.
+        </p>
+      </div>
     </div>
   );
 };
