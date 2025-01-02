@@ -32,6 +32,8 @@ const Login = () => {
       }
       const data = await login(loginData);
       Auth.login(data.token);
+      // Redirect on successful login
+      window.location.href = '/dashboard';
     } catch (error) {
       setError(
         error instanceof Error ? error.message : 'An unknown error occurred. Please try again.'
@@ -53,44 +55,52 @@ const Login = () => {
       }}
     >
       <div className="form-container">
-        <form className="form login-form" onSubmit={handleSubmit}>
-          <h1 className="text-center mb-4">Login</h1>
-          {error && <div className="error-message alert alert-danger">{error}</div>}
-          <div className="form-group mb-3">
-            <label htmlFor="username" className="form-label">
-              Username
-            </label>
-            <input
-              className="form-control"
-              id="username"
-              type="text"
-              name="username"
-              value={loginData.username}
-              onChange={handleChange}
-              aria-label="Enter your username"
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              className="form-control"
-              id="password"
-              type="password"
-              name="password"
-              value={loginData.password}
-              onChange={handleChange}
-              aria-label="Enter your password"
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <button className="btn btn-primary w-100" type="submit" disabled={loading}>
-              {loading ? 'Logging in...' : 'Login'}
-            </button>
-          </div>
+        <form className="form login-form" onSubmit={handleSubmit} noValidate>
+          <fieldset disabled={loading}>
+            <h1 className="text-center mb-4">Login</h1>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
+            <div className="form-group mb-3">
+              <label htmlFor="username" className="form-label" id="username-label">
+                Username
+              </label>
+              <input
+                className="form-control"
+                id="username"
+                type="text"
+                name="username"
+                value={loginData.username ?? ""}
+                onChange={handleChange}
+                aria-label="Enter your username"
+                aria-describedby="username-label"
+                required
+              />
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="password" className="form-label" id="password-label">
+                Password
+              </label>
+              <input
+                className="form-control"
+                id="password"
+                type="password"
+                name="password"
+                value={loginData.password}
+                onChange={handleChange}
+                aria-label="Enter your password"
+                aria-describedby="password-label"
+                required
+              />
+            </div>
+            <div className="form-group mb-3">
+              <button className="btn btn-primary w-100" type="submit" disabled={loading}>
+                {loading ? 'Logging in...' : 'Login'}
+              </button>
+            </div>
+          </fieldset>
         </form>
 
         {/* External Links to Events */}
