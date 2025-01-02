@@ -88,7 +88,7 @@ const Login = () => {
                 id="password"
                 type="password"
                 name="password"
-                value={loginData.password}
+                value={loginData.password ?? ""}
                 onChange={handleChange}
                 aria-label="Enter your password"
                 aria-describedby="password-label"
