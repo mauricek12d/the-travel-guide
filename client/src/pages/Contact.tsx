@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import WildwoodImage from '../assets/Wildwood.jpg'; // Adjust the path as needed
+import './Contact.css';
 
 const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -9,66 +11,101 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="container my-5">
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title text-center">Contact Us</h5>
-          <p className="card-text text-center">Fill out the form below to get in touch with us.</p>
-          {submitted ? (
-            <div className="alert alert-success text-center" role="alert">
-              Thank you for reaching out! We'll contact you soon.
-            </div>
-          ) : (
-            <form className="row g-3" onSubmit={handleSubmit}>
-              <div className="col-md-6">
-                <label htmlFor="name" className="form-label">Your Name</label>
-                <input type="text" className="form-control" id="name" required />
-              </div>
-              <div className="col-md-6">
-                <label htmlFor="email" className="form-label">Your Email</label>
-                <input type="email" className="form-control" id="email" required />
-              </div>
-              <div className="col-12">
-                <label htmlFor="message" className="form-label">Your Message</label>
-                <textarea className="form-control" id="message" rows={4} required></textarea>
-              </div>
-              <div className="col-12">
-                <button type="submit" className="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#thankYouModal">
-                  Send Message
-                </button>
-              </div>
-            </form>
-          )}
-        </div>
-      </div>
-      {/* Thank You Modal */}
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundImage: `url(${WildwoodImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        padding: '20px',
+      }}
+    >
       <div
-        className="modal fade"
-        id="thankYouModal"
-        tabIndex={-1}
-        aria-labelledby="thankYouModalLabel"
-        aria-hidden="true"
+        style={{
+          padding: '20px',
+          borderRadius: '10px',
+          width: '100%',
+          maxWidth: '800px',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Subtle shadow
+        }}
       >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="thankYouModalLabel">Thank You!</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              Thank you for reaching out! We'll contact you soon.
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
+        <h1 className="mb-4" style={{ color: 'blue' }}>Contact Us</h1>
+        
+        {submitted ? (
+          <div
+            className="alert alert-success"
+            role="alert"
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', color: '#333' }}
+          >
+            Thank you for reaching out! We'll contact you soon.
           </div>
-        </div>
+        ) : (
+          <form
+            className="contact-form"
+            onSubmit={handleSubmit}
+            style={{ display: 'grid', gap: '20px' }}
+          >
+            <div className="form-group">
+              <label htmlFor="name" className="form-label" style={{ color: 'white' }}>
+                Your Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="Enter your full name"
+                required
+                style={{ padding: '15px', fontSize: '1rem', background: 'rgba(255, 255, 255, 0.7)' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email" className="form-label" style={{ color: 'white' }}>
+                Your Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Enter your email address"
+                required
+                style={{ padding: '15px', fontSize: '1rem', background: 'rgba(255, 255, 255, 0.7)' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="message" className="form-label" style={{ color: 'white' }}>
+                Your Message
+              </label>
+              <textarea
+                className="form-control"
+                id="message"
+                rows={6}
+                placeholder="Write your message here"
+                required
+                style={{ padding: '15px', fontSize: '1rem', background: 'rgba(255, 255, 255, 0.7)' }}
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{
+                padding: '15px',
+                fontSize: '1.2rem',
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+              }}
+            >
+              Send Message
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
