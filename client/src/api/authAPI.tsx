@@ -1,17 +1,35 @@
-import type { UserLogin } from '../interface/UserLogin';
+import axios from "axios";
 
-export const login = async (userData: UserLogin): Promise<{ token: string }> => {
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userData),
-  });
+const API_URL = "http://localhost:3001/api/users"; 
 
-  if (!response.ok) {
-    throw new Error('Login failed');
+// Register User
+export const registerUser = async (userData: { name: string; email: string; password: string }) => {
+  try {
+    const response = await axios.post(`${API_URL}/register`, userData);
+    return response.data;
+  } catch (error: any) { // ✅ Explicitly type error as `any`
+    return error.response?.data || { message: "An error occurred" };
   }
+};
 
-  return response.json(); 
+// Login User
+export const loginUser = async (userData: { email: string; password: string }) => {
+  try {
+    const response = await axios.post(`${API_URL}/login`, userData);
+    return response.data;
+  } catch (error: any) { // ✅ Explicitly type error as `any`
+    return error.response?.data || { message: "An error occurred" };
+  }
+};
+
+// Get Current User (Protected Route)
+export const getUser = async (token: string) => {
+  try {
+    const response = await axios.get(`${API_URL}/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error: any) { // ✅ Explicitly type error as `any`
+    return error.response?.data || { message: "An error occurred" };
+  }
 };

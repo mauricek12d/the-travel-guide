@@ -1,6 +1,7 @@
 import sequelize from '../config/connection.js';
-import { UserInfo } from './User.js';
+import { UserInit } from './User.js';
 
-const User = UserInfo(sequelize);
+const User = UserInit(sequelize);   
+
 
 export { sequelize, User };

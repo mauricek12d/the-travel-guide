@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",  // ✅ Ensures compatibility with Node.js
+    "moduleResolution": "node",
+    "outDir": "./dist",  // ✅ Ensures compiled files go to "dist/"
+    "rootDir": "./src",  // ✅ Source files in "src/"
+    "jsx": "react-jsx",  // ✅ Enables JSX in TypeScript
+    "esModuleInterop": true,  // ✅ Required for default imports
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
+}

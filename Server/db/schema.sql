@@ -1,0 +1,5 @@
+-- DROP DATABASE
+DROP DATABASE IF EXISTS travelguide_db;
+
+-- CREATE DATABASE
+CREATE DATABASE travelguide_db;
