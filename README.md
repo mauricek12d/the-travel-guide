@@ -68,8 +68,8 @@ CREATE DATABASE travelguide_db;
 
 Configure a .env file in the server folder 
 DB_NAME=travelguide_db
-DB_USER=postgres
-DB_PASSWORD=your_password
+DB_USER=your_psql_username
+DB_PASSWORD=your_psql_password
 JWT_SECRET_KEY=your_super_secret_key
 DATABASE_URL=postgres://postgres:your_password@localhost:5432/travelguide_db
 
