@@ -1,51 +1,86 @@
-import jwtDecode, { JwtPayload } from 'jwt-decode'; 
-import type { UserData } from '../interface/UserData';
+import jwtDecode, { JwtPayload } from "jwt-decode";
+import type { UserData } from "../interface/UserData";
 
 class AuthService {
   getProfile(): UserData | null {
     try {
       const token = this.getToken();
-      if (!token) {
-        throw new Error('No token found');
+      if (!token || this.isTokenExpired(token)) {
+        this.logout(); // Auto logout if token is expired
+        return null;
       }
-      return jwtDecode<UserData>(token); // Decoding the token to extract user data
+      return jwtDecode<UserData>(token);
     } catch (err) {
-      console.error('Error decoding token:', err);
-      return null; // Return null if the token is invalid
+      console.error("Error decoding token:", err);
+      return null;
     }
   }
 
   loggedIn(): boolean {
     const token = this.getToken();
-    return !!token && !this.isTokenExpired(token); // Check if token exists and is not expired
+    if (!token) return false;
+    
+    if (this.isTokenExpired(token)) {
+      console.warn("Token expired, logging out...");
+      this.logout(); // Auto logout if expired
+      return false;
+    }
+
+    return true;
   }
 
   isTokenExpired(token: string): boolean {
     try {
       const decoded = jwtDecode<JwtPayload>(token);
-      if (!decoded?.exp) {
-        // If the token doesn't have an 'exp', consider it invalid
-        return true;
-      }
-      return decoded.exp < Date.now() / 1000; // Check if 'exp' is in the past
+      if (!decoded?.exp) return true;
+      
+      const currentTime = Date.now() / 1000;
+      return decoded.exp < currentTime;
     } catch (err) {
-      console.error('Error decoding token for expiration check:', err);
-      return true; // Consider the token expired if decoding fails
+      console.error("Error decoding token for expiration check:", err);
+      return true;
     }
   }
 
   getToken(): string {
-    return localStorage.getItem('id_token') || ''; // Retrieve token from localStorage
+    return localStorage.getItem("id_token") || "";
+  }
+
+  async refreshToken(): Promise<boolean> {
+    try {
+      const response = await fetch("http://localhost:3001/api/users/refresh-token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: this.getToken() }),
+      });
+
+      const data = await response.json();
+      if (response.ok && data.token) {
+        this.login(data.token);
+        console.log("Token refreshed successfully.");
+        return true;
+      } else {
+        console.error("Failed to refresh token:", data.message);
+        this.logout();
+        return false;
+      }
+    } catch (error) {
+      console.error("Error refreshing token:", error);
+      this.logout();
+      return false;
+    }
   }
 
   login(idToken: string): void {
-    localStorage.setItem('id_token', idToken); // Save the token to localStorage
-    window.location.assign('/'); // Redirect to the home page after login
+    localStorage.setItem("id_token", idToken);
+    window.location.assign("/");
   }
 
-  logout(redirectUrl: string = '/'): void {
-    localStorage.removeItem('id_token'); // Remove the token from localStorage
-    window.location.assign(redirectUrl); // Redirect to the specified URL
+  logout(redirectUrl: string = "/login"): void {
+    localStorage.removeItem("id_token");
+    window.location.assign(redirectUrl);
   }
 }
 

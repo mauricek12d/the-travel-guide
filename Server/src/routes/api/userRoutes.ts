@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { body, validationResult } from "express-validator";
 import { User } from "../../models";
-import authMiddleware from "../../middleware/auth"; 
+import authMiddleware from "../../middleware/auth";
 
 const router = express.Router();
 
@@ -65,12 +65,40 @@ router.post(
       }
 
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, {
-        expiresIn: "1h",
+        expiresIn: "24h", 
       });
 
       res.json({ message: "Login successful", token });
     } catch (error) {
       next(error);
+    }
+  }
+);
+
+// ✅ Refresh Token Route (Extends Expiry Without Logging Out)
+router.post(
+  "/refresh-token",
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { token } = req.body;
+      if (!token) {
+        res.status(400).json({ message: "No token provided" });
+        return;
+      }
+
+      const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string, { ignoreExpiration: true });
+
+      const user = await User.findByPk(decoded.id);
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+
+      const newToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: "24h" });
+
+      res.json({ token: newToken });
+    } catch (error) {
+      res.status(401).json({ message: "Invalid token" });
     }
   }
 );
