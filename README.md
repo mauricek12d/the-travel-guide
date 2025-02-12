@@ -24,11 +24,6 @@ This project is a fullstack web application that showcases popular destinations 
 - **Weather API integration** (optional feature).
 - **CORS handling** to allow frontend-backend communication.
 
-✅ **Deployment**
-- **Frontend deployed on Netlify / Vercel**.
-- **Backend deployed on Render / Heroku**.
-- **Database hosted on PostgreSQL (Railway, ElephantSQL, or Supabase).**
-
 ---
 
 ## **🛠️ Technologies Used**
