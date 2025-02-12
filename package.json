@@ -1,0 +1,17 @@
+{
+  "name": "fullstack-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install": "npm install --prefix client && npm install --prefix server",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "npm --prefix server run start",
+    "start:client": "npm --prefix client run dev",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
