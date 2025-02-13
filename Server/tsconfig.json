@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "CommonJS",  // ✅ Ensures compatibility with Node.js
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "outDir": "./dist",  // ✅ Ensures compiled files go to "dist/"
-    "rootDir": "./src",  // ✅ Source files in "src/"
-    "esModuleInterop": true,  // ✅ Required for default imports
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,6 +16,5 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "../client"]
+  "include": ["src"]
 }
