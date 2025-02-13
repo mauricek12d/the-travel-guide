@@ -2,6 +2,7 @@ import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import fs from "fs"; // ✅ Import filesystem module
 import sequelize from "./config/connection"; // Import database connection
 import { userRouter } from "./routes/api/userRoutes"; // Import user routes
 import externalApis from "./routes/api/externalApis"; // Import external API routes
@@ -16,18 +17,18 @@ app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/external", externalApis);
 
-// ✅ Serve React Frontend from `client/dist`
-const clientBuildPath = path.join(__dirname, "../../client/dist");
-app.use(express.static(clientBuildPath));
+// ✅ Serve React Frontend (Only if the folder exists)
+const clientBuildPath = path.join(__dirname, "../client/dist");
+if (fs.existsSync(clientBuildPath)) {
+  app.use(express.static(clientBuildPath));
 
-app.get("/", (_req, res) => {
-  res.json({ message: "Server is running" });
-});
-
-// ✅ Catch-all route to serve frontend
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(clientBuildPath, "index.html"));
-});
+  // ✅ Catch-all route to serve frontend
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  });
+} else {
+  console.warn("⚠️ Frontend build folder not found. Skipping static file serving.");
+}
 
 // ✅ Define Server Port
 const PORT = process.env.PORT || 3001;
