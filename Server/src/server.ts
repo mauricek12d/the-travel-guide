@@ -18,7 +18,7 @@ app.use("/api/users", userRouter);
 app.use("/api/external", externalApis);
 
 // ✅ Serve React Frontend (Only if the folder exists)
-const clientBuildPath = path.join(__dirname, "../client/dist");
+const clientBuildPath = path.join(__dirname, "../../client/dist");
 if (fs.existsSync(clientBuildPath)) {
   app.use(express.static(clientBuildPath));
 
